@@ -1,0 +1,27 @@
+services:
+  backend1:
+    build: .
+    networks: [lb-net]
+
+  backend2:
+    build: .
+    networks: [lb-net]
+
+  backend3:
+    build: .
+    networks: [lb-net]
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - backend1
+      - backend2
+      - backend3
+    networks: [lb-net]
+
+networks:
+  lb-net:
