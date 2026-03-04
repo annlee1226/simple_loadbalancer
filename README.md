@@ -11,7 +11,7 @@ docker-compose up --build
 ## Test Round-Robin
 
 ```bash
-#Test load balancer multiple times. Each response shows a different container hostname
+# Test load balancer multiple times. Each response shows a different container hostname
 curl localhost:8080
 curl localhost:8080
 curl localhost:8080
@@ -20,13 +20,13 @@ curl localhost:8080
 ## Test Failover
 
 ```bash
-#Stop one backend
+# Stop one backend
 docker stop simple_loadbalancer-backend2-1
 
-#Requests still work — NGINX skips the downed backend
+# Requests still ends up working. NGINX skips the backend that went down.
 curl localhost:8080
 
-#Bring it back
+# Bring back the backend that went down 
 docker start simple_loadbalancer-backend2-1
 ```
 
